@@ -1,35 +1,19 @@
 <?php
 
-// Require Files
 
-require_once 'lib/vendor/autoload.php';
+?>
 
-use Sunra\PhpSimple\HtmlDomParser;
+<form action="inc/db_connect.php" method="post">
+	<label for="">Enter your host name</label>
+	<input type="text" name="servername" placeholder="Enter your host name">
 
-// Create DOM from URL or file
-$html = HtmlDomParser::file_get_html('http://quotes.toscrape.com');
+	<label for="">Enter your db user name</label>
+	<input type="text" name="dbusername" placeholder="Enter your database user name">
 
+	<label for="">Enter your password</label>
+	<input type="password" name="dbpassword" placeholder="Enter your Database Password">
 
-$quotes = $html->find(".quote");
-
-foreach ($quotes as $element) {
-	$element = strip_tags($element);
-	$element = preg_match('/\“.+(?=\()/', $element, $matches);
-	$string = array_shift($matches);
-	echo $string.'<br>';
-}
-
-for ($i=2; $i < 12; $i++) { 
-	// Create DOM from URL or file
-	$html = HtmlDomParser::file_get_html('http://quotes.toscrape.com/page/'.$i);
-
-
-	$quotes = $html->find(".quote");
-
-	foreach ($quotes as $element) {
-		$element = strip_tags($element);
-		$element = preg_match('/\“.+(?=\()/', $element, $matches);
-		$string = array_shift($matches);
-		echo $string.'<br>';
-	}
-}
+	<label for="">Enter your db name</label>
+	<input type="password" name="dbname" placeholder="Enter your Database Password">
+	<input type="submit">
+</form>
