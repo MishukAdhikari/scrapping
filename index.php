@@ -10,10 +10,10 @@
 	<label for="">Enter your db user name</label>
 	<input type="text" name="dbusername" placeholder="Enter your database user name">
 
+	<label for="">Enter your db name</label>
+	<input type="text" name="dbname" placeholder="Enter your Database Password">
+
 	<label for="">Enter your password</label>
 	<input type="password" name="dbpassword" placeholder="Enter your Database Password">
-
-	<label for="">Enter your db name</label>
-	<input type="password" name="dbname" placeholder="Enter your Database Password">
 	<input type="submit">
 </form>

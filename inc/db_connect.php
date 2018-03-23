@@ -1,5 +1,57 @@
 <?php
 
+
+
+
+
+
+
+
+
+
+
+/* Attempt MySQL server connection. Assuming you are running MySQL
+server with default setting (user 'root' with no password) */
+$link = mysqli_connect("localhost", "root", "", "demo");
+ 
+// Check connection
+if($link === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+ 
+// Attempt insert query execution
+$sql = "INSERT INTO persons (first_name, last_name, email) VALUES
+            ('John', 'Rambo', 'johnrambo@mail.com'),
+            ('Clark', 'Kent', 'clarkkent@mail.com'),
+            ('John', 'Carter', 'johncarter@mail.com'),
+            ('Harry', 'Potter', 'harrypotter@mail.com')";
+if(mysqli_query($link, $sql)){
+    echo "Records added successfully.";
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+ 
+// Close connection
+mysqli_close($link);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	$servername = $_POST['servername'];
 	$username = $_POST['dbusername'];
 	$password = $_POST['dbpassword'];
@@ -14,7 +66,7 @@
 	}
 
 	// sql to create table
-	$sql = "CREATE TABLE QuoteScrap (
+	$sql = "CREATE TABLE IF NOT EXISTS QuoteScrap (
 	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
 	quote VARCHAR(30) NOT NULL,
 	tags VARCHAR(30) NOT NULL,
@@ -48,7 +100,10 @@
 		$string = array_shift($matches);
 		echo $string.'<br>';
 
-		"INSERT INTO QuoteScrap (quote) VALUES ({$string})";
+		//$string = mysql_real_escape_string($string);
+
+		mysqli_query($conn, "INSERT INTO QuoteScrap (id, quote, tags, page_no) VALUES ({$string})");
+
 	}
 
 	for ($i=2; $i < 12; $i++) { 
@@ -64,6 +119,8 @@
 			$string = array_shift($matches);
 			echo $string.'<br>';
 
-			"INSERT INTO QuoteScrap (quote) VALUES ({$string})";
+			//$string = mysql_real_escape_string($string);
+
+			mysqli_query($conn, "INSERT INTO QuoteScrap (id, quote, tags, page_no) VALUES ({$string})");
 		}
 	}
